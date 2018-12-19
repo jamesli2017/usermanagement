@@ -1,0 +1,25 @@
+//println "Project name is $name"
+//apply plugin:'java'
+
+dependencies {
+  compile project(':login')
+  compile project(':profile')
+}
+
+publishing {
+  publications {
+    trans(MavenPublication) {
+	  groupId 'io.homenet'
+	  artifactId 'transaction'
+	  version '1.0'
+	  
+	  from components.java
+	}
+  }
+}
+
+task transactionTask {
+  doLast {
+    println "Task name is $name"
+  }
+}

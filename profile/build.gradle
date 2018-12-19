@@ -1,0 +1,20 @@
+//println "Project name is $name"
+//apply plugin:'java'
+
+publishing {
+  publications {
+    profile(MavenPublication) {
+	  groupId 'io.homenet'
+	  artifactId 'profile'
+	  version '1.0'
+	  
+	  from components.java
+	}
+  }
+}
+
+task profileTask {
+  doLast {
+    println "Task name is $name"
+  }
+}
