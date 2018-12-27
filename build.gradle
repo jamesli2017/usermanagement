@@ -7,6 +7,10 @@
  
 //println "Project name is $name"
 
+  plugins {
+    id "net.saliman.cobertura" version "2.5.4"
+  }
+
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven-publish'
@@ -14,7 +18,8 @@ allprojects {
   apply plugin: 'checkstyle'
   apply plugin: 'eclipse'
   apply plugin: 'pmd'
-  
+  apply plugin: 'net.saliman.cobertura'
+
   version = '1.0'
   
   sourceCompatibility = '1.8'
@@ -28,8 +33,10 @@ allprojects {
     compile gradleApi()
 	compile localGroovy()
 	compile 'commons-collections:commons-collections:3.+'
+//	compile 'net.saliman:gradle-cobertura-plugin:2.+'
   
     testCompile 'junit:junit:4.+'
+	testRuntime "org.slf4j:slf4j-api:1.+"
   }
   
   checkstyle {
@@ -53,13 +60,12 @@ allprojects {
 //  ext {
 //    springVersion = '4.3.3.RELEASE'
 //    hibernateVersion='5.2.2.Final'
-//  }
-
-//  jar {
-//    manifest {
-//      attributes("Implementation-Title": "Gradle")
-//    }
-//  }
+//  
+  jar {
+    manifest {
+      attributes 'Main-Class': 'usermanagement.Main'
+    }
+  }
 
 //  configurations {
     // 所有需要忽略的包定义在此
@@ -90,6 +96,12 @@ allprojects {
      compile project(':login')
 	 compile project(':profile')
 	 compile project(':transaction')
+	 testCompile project(':login')
+	 testCompile project(':profile')
+	 testCompile project(':transaction')
+	 testRuntime project(':login')
+	 testRuntime project(':profile')
+	 testRuntime project(':transaction')
   }
 
   publishing {
