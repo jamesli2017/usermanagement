@@ -19,7 +19,7 @@ public class Main{
 	  String password = sc.nextLine();
 		
 	  Login login = new Login();
-	  if (login.login(username, password)) {
+	  f (login.login(username, password)) {
 	    loginStatus = true;
 		System.out.println("Welcome " + username);
 	  }
