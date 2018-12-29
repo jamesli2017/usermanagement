@@ -1,12 +1,23 @@
 package transpkg;
 
-import profilepkg.Profile;
-import loginpkg.Login;
 import java.util.List;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import profilepkg.Profile;
+import loginpkg.Login;
+
+/**
+*
+* Transaction class definition.
+*
+* @author james
+*/
 
 public class Transaction {
   private List<Profile> profiles = new ArrayList<>();
+  private final Logger logger = LoggerFactory.getLogger(Transaction.class);
   
   public void addProfile(Profile prof) {
     profiles.add(prof);
@@ -25,11 +36,12 @@ public class Transaction {
   }
   
   public void listProfiles(){
-    if(profiles.size() == 0) System.out.println("No profiles");
-	else{
+    if (profiles.size() == 0) {
+	  logger.info("No profiles");
+	} else {
 	  int i = 1;
-	  for(Profile p: profiles) {
-	    System.out.println("profile " + i + ": name: " + p.getName() + ", phone number: " + p.getPhoneNumber());
+	  for (Profile p: profiles) {
+	    logger.info("profile{}: name: {}, phone number: {}.", i, p.getName(), p.getPhoneNumber());
 		i++;
 	  }
 	}

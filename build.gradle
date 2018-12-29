@@ -11,14 +11,6 @@
     id "net.saliman.cobertura" version "2.5.4"
 	id "com.github.spotbugs" version "1.6.8"
   }
-
-//  configurations {
-//    spotbugsPlugins
-//  }
- 
-//  dependencies {
-//    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
-//  }
   
 allprojects {
   apply plugin: 'java'
@@ -43,11 +35,14 @@ allprojects {
     compile gradleApi()
 	compile localGroovy()
 	compile 'commons-collections:commons-collections:3.+'
-//	compile 'net.saliman:gradle-cobertura-plugin:2.+'
-  
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+	
     testCompile 'junit:junit:4.+'
 	testRuntime "org.slf4j:slf4j-api:1.+"
-//	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
+
   }
   
   checkstyle {
@@ -118,9 +113,6 @@ allprojects {
 	 testRuntime project(':transaction')
   }
   
-//  dependencies {
-//    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
-//  }
   
   publishing {
     publications {

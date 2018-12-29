@@ -1,27 +1,37 @@
 package usermanagement;
 
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import loginpkg.Login;
 import profilepkg.Profile;
 import transpkg.Transaction;
 
+/**
+* Program entry.
+*
+* @author james
+*/
 
 public class Main{
   static boolean loginStatus = false;
   
   public static void main(String[] args) {
+	final Logger logger = LoggerFactory.getLogger(Main.class);
+	
     while (!loginStatus) {
-      System.out.println("You are not login yet, you must login first.");
-	  System.out.print("Please input your username:");
+      logger.info("You are not login yet, you must login first.");
+	  logger.info("Please input your username:");
 	  Scanner sc = new Scanner(System.in);
 	  String username = sc.nextLine();
-	  System.out.print("\nPlease input your password:");
+	  logger.info("\nPlease input your password:");
 	  String password = sc.nextLine();
 		
 	  Login login = new Login();
 	  if (login.login(username, password)) {
 	    loginStatus = true;
-		System.out.println("Welcome " + username);
+		logger.info("Welcome {}", username);
 	  }
 	}
 	
@@ -34,8 +44,8 @@ public class Main{
 	trans.addProfile(prof2);
 	trans.addProfile(prof3);
 	
-	System.out.println("Total " + trans.howMany() + " profiles.");
-	System.out.println("They are:");
+	logger.info("Total {} profiles.", trans.howMany());
+	logger.info("They are:");
 	
 	trans.listProfiles();
 	
