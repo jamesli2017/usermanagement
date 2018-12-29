@@ -21,6 +21,7 @@ allprojects {
   apply plugin: 'pmd'
   apply plugin: 'net.saliman.cobertura'
   apply plugin: 'com.github.spotbugs'
+  apply plugin: 'jacoco'
 
   version = '1.0'
   
@@ -58,6 +59,16 @@ allprojects {
 //    toolVersion = '3.+'
     ignoreFailures = true
   }  
+  
+  jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+  }
+  
+  check.dependsOn jacocoTestReport
+  
 }
 //  sourceCompatibility = '1.8'
 //  targetCompatibility = '1.8'
