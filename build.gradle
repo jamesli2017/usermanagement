@@ -9,8 +9,17 @@
 
   plugins {
     id "net.saliman.cobertura" version "2.5.4"
+	id "com.github.spotbugs" version "1.6.8"
   }
 
+//  configurations {
+//    spotbugsPlugins
+//  }
+ 
+//  dependencies {
+//    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
+//  }
+  
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven-publish'
@@ -19,6 +28,7 @@ allprojects {
   apply plugin: 'eclipse'
   apply plugin: 'pmd'
   apply plugin: 'net.saliman.cobertura'
+  apply plugin: 'com.github.spotbugs'
 
   version = '1.0'
   
@@ -37,6 +47,7 @@ allprojects {
   
     testCompile 'junit:junit:4.+'
 	testRuntime "org.slf4j:slf4j-api:1.+"
+//	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
   }
   
   checkstyle {
@@ -48,8 +59,11 @@ allprojects {
     ignoreFailures = true
   }
   
-}  
-
+  spotbugs {
+//    toolVersion = '3.+'
+    ignoreFailures = true
+  }  
+}
 //  sourceCompatibility = '1.8'
 //  targetCompatibility = '1.8'
   
@@ -103,7 +117,11 @@ allprojects {
 	 testRuntime project(':profile')
 	 testRuntime project(':transaction')
   }
-
+  
+//  dependencies {
+//    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.+'
+//  }
+  
   publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -116,7 +134,6 @@ allprojects {
     }
   }
 
-  
 task listJars(description: 'Display all compile jars.') {
   doLast {
     println "$description"
